@@ -1,0 +1,12 @@
+/SourceGameSocverse/.vs
+Library
+Logs
+obj
+/SourceGameSocverse/*.sln
+/SourceGameSocverse/*.csproj
+/SourceGameSocverse/*.vsconfig
+/SourceGameSocverse/Temp
+/SourceGameSocverse/UserSettings
+/SourceGameSocverse/fbg.log
+/SourceGameSocverse/Assets/TransparencyCapture
+/SourceGameSocverse/Assets/AllAsset/Epic Toon FX

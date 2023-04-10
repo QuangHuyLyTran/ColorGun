@@ -8,6 +8,7 @@ public class Laucher : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField roomNameInputField;
     [SerializeField] TMP_Text errorText;
+    [SerializeField] TMP_Text roomNameText;
     void Start()
     {
         Debug.Log("Connecting to Master");
@@ -36,10 +37,20 @@ public class Laucher : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         LobbyManager.Instance.OpenLobby("room");
+        roomNameText.text = PhotonNetwork.CurrentRoom.Name;
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         errorText.text = "Create Room Fail: " + message;
         LobbyManager.Instance.OpenLobby("error");
+    }
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        LobbyManager.Instance.OpenLobby("loading");
+    }
+    public override void OnLeftRoom()
+    {
+        LobbyManager.Instance.OpenLobby("lobby");
     }
 }

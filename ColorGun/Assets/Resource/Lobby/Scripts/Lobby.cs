@@ -5,7 +5,7 @@ using UnityEngine;
 public class Lobby : MonoBehaviour
 {
     public string lobbyName;
-    [HideInInspector] public bool open;
+    public bool open;
    public void Open()
     {
         open = true;

@@ -57,32 +57,58 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
-    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
-    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
+    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
-    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\SocketWebTcp.cs" />
+    <Compile Include="Assets\Resource\Connect\Scripts\Laucher.cs" />
+    <Compile Include="Assets\Photon\PhotonLibs\WebSocket\WebSocket.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
+    <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
+    <Compile Include="Assets\Resource\Intro\Scripts\ChangeScene.cs" />
+    <Compile Include="Assets\Resource\Intro\Scripts\AudioMN.cs" />
+    <Compile Include="Assets\Resource\Lobby\Scripts\Lobby.cs" />
+    <Compile Include="Assets\Resource\Lobby\Scripts\LobbyManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Photon\PhotonLibs\changes-library.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
     <None Include="Assets\Photon\PhotonChat\Demos\DemoChat\Files\eurof_tt.txt" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll" />
     <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.dll" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Photon\PhotonLibs\Metro\Photon3Unity3D.dll" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -292,6 +318,12 @@
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Unsafe">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
@@ -309,12 +341,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Photon\PhotonLibs\WebSocket\websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Photon3Unity3D">
-      <HintPath>Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.12f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -684,6 +710,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="PhotonChat.Player.csproj">
+      <Project>{BEC8F4EC-6657-88F7-F1A9-BD4217306783}</Project>
+      <Name>PhotonChat.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Configuration.Player.csproj">
       <Project>{514DFF00-C95E-0D56-7428-890263F75EB6}</Project>
       <Name>Unity.Multiplayer.Tools.NetStatsMonitor.Configuration.Player</Name>
@@ -703,6 +733,10 @@
     <ProjectReference Include="UnityEngine.UI.Player.csproj">
       <Project>{449FAF50-D595-A4CF-086F-D33A0CF13E66}</Project>
       <Name>UnityEngine.UI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Player.csproj">
+      <Project>{F0E4DF5C-2113-7C2A-B0FB-66268BDCA576}</Project>
+      <Name>PhotonUnityNetworking.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Multiplayer.Tools.Common.Player.csproj">
       <Project>{BEB484A6-8300-0030-5E40-A286E2580670}</Project>
@@ -740,6 +774,14 @@
       <Project>{9813EEF2-BBE1-5790-B35A-305915DC5545}</Project>
       <Name>Unity.VisualScripting.Flow.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="PhotonRealtime.Player.csproj">
+      <Project>{A2B343F9-3E44-9E73-818C-979E1015DB35}</Project>
+      <Name>PhotonRealtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Player.csproj">
+      <Project>{038C9DEB-BEA3-39AB-6418-5328DD6F504F}</Project>
+      <Name>PhotonUnityNetworking.Utilities.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Player.csproj">
       <Project>{FCC2AABA-0829-127A-7AB0-163256A88CDD}</Project>
       <Name>Unity.Services.Core.Player</Name>
@@ -764,6 +806,10 @@
       <Project>{3B5A1E34-D648-1DD3-1396-1821372B61C6}</Project>
       <Name>Unity.Services.Core.Environments.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Demos.Player.csproj">
+      <Project>{8DEED17D-EA5D-5057-CE9B-46EC8B5BFBFA}</Project>
+      <Name>PhotonUnityNetworking.Demos.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Multiplayer.Tools.NetStatsMonitor.Implementation.Player.csproj">
       <Project>{1D47077D-0E3F-30D9-FB71-57C165962B3D}</Project>
       <Name>Unity.Multiplayer.Tools.NetStatsMonitor.Implementation.Player</Name>
@@ -771,26 +817,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{AF162B7D-4669-B1A7-CE1F-5734D0937B5D}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Player.csproj">
-      <Project>{F0E4DF5C-2113-7C2A-B0FB-66268BDCA576}</Project>
-      <Name>PhotonUnityNetworking.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Utilities.Player.csproj">
-      <Project>{038C9DEB-BEA3-39AB-6418-5328DD6F504F}</Project>
-      <Name>PhotonUnityNetworking.Utilities.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonUnityNetworking.Demos.Player.csproj">
-      <Project>{8DEED17D-EA5D-5057-CE9B-46EC8B5BFBFA}</Project>
-      <Name>PhotonUnityNetworking.Demos.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonChat.Player.csproj">
-      <Project>{BEC8F4EC-6657-88F7-F1A9-BD4217306783}</Project>
-      <Name>PhotonChat.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="PhotonRealtime.Player.csproj">
-      <Project>{A2B343F9-3E44-9E73-818C-979E1015DB35}</Project>
-      <Name>PhotonRealtime.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using Photon.Realtime;
 
 public class Laucher : MonoBehaviourPunCallbacks
 {
+    public static Laucher Instance;
+
     [SerializeField] TMP_InputField roomNameInputField;
     [SerializeField] TMP_Text errorText;
     [SerializeField] TMP_Text roomNameText;
+    [SerializeField] Transform roomListContent;
+    [SerializeField] GameObject roomListPrefab;
+
+    void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         Debug.Log("Connecting to Master");
@@ -49,8 +59,26 @@ public class Laucher : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         LobbyManager.Instance.OpenLobby("loading");
     }
+
+    public void JoinRoom(RoomInfo info)
+    {
+        PhotonNetwork.JoinRoom(info.Name);
+        LobbyManager.Instance.OpenLobby("");
+    }    
     public override void OnLeftRoom()
     {
         LobbyManager.Instance.OpenLobby("lobby");
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach(Transform trans in roomListContent)
+        {
+            Destroy(trans.gameObject);
+        }
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            Instantiate(roomListPrefab, roomListContent).GetComponent<RoomItem>().SetUp(roomList[i]);
+        }    
     }
 }

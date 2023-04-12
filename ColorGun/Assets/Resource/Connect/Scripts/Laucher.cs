@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using System.Linq;
 
 public class Laucher : MonoBehaviourPunCallbacks
 {
@@ -13,7 +14,9 @@ public class Laucher : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text errorText;
     [SerializeField] TMP_Text roomNameText;
     [SerializeField] Transform roomListContent;
-    [SerializeField] GameObject roomListPrefab;
+    [SerializeField] Transform playerListContent;
+    [SerializeField] GameObject roomListItemPrefab;
+    [SerializeField] GameObject playerListItemPrefab;
 
     void Awake()
     {
@@ -33,6 +36,7 @@ public class Laucher : MonoBehaviourPunCallbacks
     {
         LobbyManager.Instance.OpenLobby("lobby");
         Debug.Log("Joined Lobby");
+        PhotonNetwork.NickName = "Player " + Random.Range(0, 100).ToString("000");
     }
     public void CreateRoom()
     {
@@ -48,6 +52,13 @@ public class Laucher : MonoBehaviourPunCallbacks
     {
         LobbyManager.Instance.OpenLobby("room");
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+
+        Player[] players = PhotonNetwork.PlayerList;
+        for (int i = 0; i < players.Count(); i++)
+        {
+            Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerItem>().SetUp(players[i]);
+
+        }
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -63,7 +74,7 @@ public class Laucher : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info)
     {
         PhotonNetwork.JoinRoom(info.Name);
-        LobbyManager.Instance.OpenLobby("");
+        LobbyManager.Instance.OpenLobby("loading");      
     }    
     public override void OnLeftRoom()
     {
@@ -78,7 +89,12 @@ public class Laucher : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < roomList.Count; i++)
         {
-            Instantiate(roomListPrefab, roomListContent).GetComponent<RoomItem>().SetUp(roomList[i]);
+            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomItem>().SetUp(roomList[i]);
         }    
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerItem>().SetUp(newPlayer);
     }
 }

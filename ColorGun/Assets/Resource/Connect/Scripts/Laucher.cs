@@ -17,6 +17,7 @@ public class Laucher : MonoBehaviourPunCallbacks
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] GameObject playerListItemPrefab;
+    [SerializeField] GameObject startGameBtn;
 
     void Awake()
     {
@@ -31,6 +32,7 @@ public class Laucher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connected to Master");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     public override void OnJoinedLobby()
     {
@@ -59,11 +61,23 @@ public class Laucher : MonoBehaviourPunCallbacks
             Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerItem>().SetUp(players[i]);
 
         }
+
+        startGameBtn.SetActive(PhotonNetwork.IsMasterClient);
+    }
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        startGameBtn.SetActive(PhotonNetwork.IsMasterClient);
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         errorText.text = "Create Room Fail: " + message;
         LobbyManager.Instance.OpenLobby("error");
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(2);
     }
     public void LeaveRoom()
     {

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -18,9 +19,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
-    void OnEnable()
+    public override void OnEnable()
     {
         base.OnEnable();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        
+    }
 }

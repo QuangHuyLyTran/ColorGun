@@ -18,7 +18,7 @@ public class LobbyManager : MonoBehaviour
         {
             if(lobbys[i].lobbyName == lobbyName)
             {
-                OpenLobby(lobbys[i]);
+                lobbys[i].Open();
             }  
             else if(lobbys[i].open)
             {

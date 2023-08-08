@@ -2008,7 +2008,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977529305}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &977529307
 Camera:
   m_ObjectHideFlags: 0
@@ -4640,6 +4640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 5796333035849934135, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
+      propertyPath: jumpForce
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8731726888483344443, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4650,7 +4654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8731726888483344443, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 679.04596
+      value: 731.1
       objectReference: {fileID: 0}
     - target: {fileID: 8731726888483344443, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
       propertyPath: m_LocalPosition.z

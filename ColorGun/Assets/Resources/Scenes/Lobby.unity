@@ -4636,9 +4636,17 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1632358417259398374, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3986581141840434644, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
       propertyPath: m_Name
       value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5725508242848474068, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5796333035849934135, guid: 0bedbd1a2549a544a935d03d35ae84c2, type: 3}
       propertyPath: jumpForce

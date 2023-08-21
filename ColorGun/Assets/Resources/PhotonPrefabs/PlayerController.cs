@@ -1,28 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
+using Photon.Pun;
+using System.Security.Cryptography;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject cameraHolder;
     [SerializeField] float mouseSensitivity, sprintSpeed, walkSpeed, jumpForce, smoothTime;
+
+    [SerializeField] Item[] items;
+    int itemIndex;
+    int previousItemIndex = -1;
+
     float verticalLookRotation;
     bool grounded;
     Vector3 smoothMoveVelocity;
     Vector3 moveAmount;
 
     Rigidbody rb;
+
+    PhotonView PV;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        PV = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+        if (!PV.IsMine) return;
         Look();
         Move();
         Jump();
+        
+        for(int i = 0; i < items.Length; i++)
+        {
+            if(Input.GetKeyDown((i + 1).ToString()))
+            {
+                EquipItem(i);
+                break;
+            }
+        }
+
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        {
+            if(itemIndex >= items.Length - 1)
+            {
+                EquipItem(0);
+            }else
+            {
+                EquipItem(itemIndex + 1);
+            }
+        }
+        else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        {
+            if(itemIndex <=0)
+            {
+                EquipItem(items.Length - 1);
+            }
+            else
+            {
+                EquipItem(itemIndex - 1);
+            }    
+        }    
+    }
+    void Start()
+    {
+        if (PV.IsMine)
+        {
+            EquipItem(0);
+            
+        }
+        else
+        {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(rb);
+        }
     }
     void Look()
     {
@@ -38,9 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
-        moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);
-
-        
+        moveAmount = Vector3.SmoothDamp(moveAmount, moveDir * (Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed), ref smoothMoveVelocity, smoothTime);        
     }    
      void Jump()
     {
@@ -48,15 +102,45 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(transform.up * jumpForce);
         }
-    }    
+    }
+    void EquipItem(int _index)
+    {
+        if (_index == previousItemIndex)
+            return;    
+        itemIndex = _index;
+        items[itemIndex].itemGameObject.SetActive(true);
+
+        if (previousItemIndex != -1)
+        {
+            items[previousItemIndex].itemGameObject.SetActive(false);
+        }
+
+        previousItemIndex = itemIndex;
+
+        if(PV.IsMine)
+        {
+            Hashtable hash = new Hashtable();
+            hash.Add("itemIndex", itemIndex);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+        
+    }
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if(!PV.IsMine && targetPlayer == PV.Owner)
+        {
+            EquipItem((int)changedProps["itemIndex"]);
+        }
+    }
     public void SetGroundedState(bool _grounded)
     {
         grounded = _grounded;
-        Debug.Log(grounded);
     }
 
     void FixedUpdate()
     {
+        if (!PV.IsMine) 
+            return;
         rb.MovePosition(rb.position + transform.TransformDirection(moveAmount) * Time.fixedDeltaTime);
     }
-}
+} 

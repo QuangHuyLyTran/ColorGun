@@ -37,8 +37,7 @@ public class Laucher : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         LobbyManager.Instance.OpenLobby("lobby");
-        Debug.Log("Joined Lobby");
-        PhotonNetwork.NickName = "Player " + Random.Range(0, 100).ToString("000");
+        Debug.Log("Joined Lobby");      
     }
     public void CreateRoom()
     {

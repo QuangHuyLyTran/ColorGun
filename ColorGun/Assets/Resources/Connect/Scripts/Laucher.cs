@@ -5,6 +5,8 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using System.Linq;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Laucher : MonoBehaviourPunCallbacks
 {
@@ -18,15 +20,24 @@ public class Laucher : MonoBehaviourPunCallbacks
     [SerializeField] GameObject roomListItemPrefab;
     [SerializeField] GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameBtn;
+    [SerializeField] Button exitGameBtn;
 
     void Awake()
     {
         Instance = this;
     }
+
+    private void Update()
+    {
+        exitGameBtn.onClick.AddListener(() => { 
+        Application.Quit();
+        });
+    }
     void Start()
     {
-        Debug.Log("Connecting to Master");
-        PhotonNetwork.ConnectUsingSettings();
+     PhotonNetwork.Disconnect();
+     Debug.Log("Connecting to Master");
+     PhotonNetwork.ConnectUsingSettings();       
     }
     public override void OnConnectedToMaster()
     {
@@ -78,17 +89,12 @@ public class Laucher : MonoBehaviourPunCallbacks
         errorText.text = "Create Room Fail: " + message;
         LobbyManager.Instance.OpenLobby("error");
     }
-
-    public void StartGame()
-    {
-        PhotonNetwork.LoadLevel(2);
-    }
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
         LobbyManager.Instance.OpenLobby("loading");
     }
-
+    
     public void JoinRoom(RoomInfo info)
     {
         PhotonNetwork.JoinRoom(info.Name);
@@ -98,7 +104,10 @@ public class Laucher : MonoBehaviourPunCallbacks
     {
         LobbyManager.Instance.OpenLobby("lobby");
     }
-
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel(2);
+    }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         foreach(Transform trans in roomListContent)
@@ -117,4 +126,6 @@ public class Laucher : MonoBehaviourPunCallbacks
     {
         Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerItem>().SetUp(newPlayer);
     }
+    
+
 }

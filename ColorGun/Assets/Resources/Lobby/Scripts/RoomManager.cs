@@ -8,6 +8,7 @@ using System.IO;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public static RoomManager Instance;
+    public bool Leaved;
 
     void Awake()
     {
@@ -17,8 +18,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
             return;
         }
         DontDestroyOnLoad(gameObject);
-        Instance = this;
+        Instance = this;      
     }
+    void Update()
+    {
+        
+    }
+
 
     public override void OnEnable()
     {

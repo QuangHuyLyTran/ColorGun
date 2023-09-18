@@ -6,6 +6,7 @@ using System.IO;
 using Photon.Realtime;
 using System.Linq;
 using Hastable = ExitGames.Client.Photon.Hashtable;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     GameObject controller;
     int kills;
     int deaths;
+    SingleShotGun singleGun;
+    Scoreboard SC;
     void Awake()
     {
         PV = GetComponent<PhotonView>();
@@ -32,14 +35,20 @@ public class PlayerManager : MonoBehaviour
 
     public void Die()
     {
+        
         PhotonNetwork.Destroy(controller);
-        CreateController();
-
         deaths++;
-
+        Invoke("GetDie", 3f);
+          
+    }
+    public void GetDie()
+    {
+        CreateController();
         Hastable hash = new Hastable();
         hash.Add("deaths", deaths);
         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        singleGun = new SingleShotGun();
+        singleGun.mag = 5;
     }
 
     public void GetKill()
@@ -51,13 +60,14 @@ public class PlayerManager : MonoBehaviour
     void RPC_GetKill()
     {
         kills++;
-
         Hastable hash = new Hastable();
         hash.Add("kills", kills);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);       
     }
     public static PlayerManager Find(Player player)
     {
         return FindObjectsOfType<PlayerManager>().SingleOrDefault(x => x.PV.Owner == player);
-    }    
+    }
+
+    
 }

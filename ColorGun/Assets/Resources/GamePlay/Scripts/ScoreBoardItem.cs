@@ -19,7 +19,6 @@ public class ScoreBoardItem : MonoBehaviourPunCallbacks
         this.player = player;
         UpdateStats();
     }  
-
     void UpdateStats()
     {
         if(player.CustomProperties.TryGetValue("kills", out object kills))
@@ -29,7 +28,7 @@ public class ScoreBoardItem : MonoBehaviourPunCallbacks
         if (player.CustomProperties.TryGetValue("deaths", out object deaths))
         {
             deathTxt.text = deaths.ToString();
-        }
+        } 
     }    
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {

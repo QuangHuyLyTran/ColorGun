@@ -9,7 +9,8 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 {
     [SerializeField] Transform container;
     [SerializeField] GameObject scoreboardItemPref;
-    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] public CanvasGroup canvasGroup;
+    [SerializeField] GameObject healthBox1, healthBox2, healthBox3;
 
     Dictionary<Player, ScoreBoardItem> scoreboardItems = new Dictionary<Player, ScoreBoardItem>();
 
@@ -31,6 +32,7 @@ public class Scoreboard : MonoBehaviourPunCallbacks
         {
             canvasGroup.alpha = 0;
         }
+        
     }
     void AddScoreboardItem(Player player)
     {
